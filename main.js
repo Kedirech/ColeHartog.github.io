@@ -1,5 +1,5 @@
 $(document).ready(function(){
- 
+
     var audios = function(){
         var i = Math.floor(Math.random() * (4 - 1)) + 1;
         if(i === 1){
@@ -13,21 +13,21 @@ $(document).ready(function(){
         }
         return audioc;
     }
-    
+
     var audio = audios();
-    
+
     audio.volume = .2;
     audio.loop = true;
     audio.play();
     var coinsound = $('#coinnoise')[0];
     coinsound.volume = 1;
     var breaksound = $('#break')[0];
-    
-    
+
+
     var mins = 0;
     var sec = 0;
     var score = 0;
-    
+
     setInterval(function(){
         if(sec === 59){
             sec = 0;
@@ -40,9 +40,9 @@ $(document).ready(function(){
             else{
                 $('#seconds').text(sec);}
         }
-        
+
     }, 1000);
-    
+
     setInterval(function(){
         mins++;
         if(mins <= 9){
@@ -50,7 +50,7 @@ $(document).ready(function(){
         }
         else $('#minutes').text(mins);
     }, 60000);
-    
+
     function collision($div1, $div2) {
       var x1 = $div1.offset().left;
       var y1 = $div1.offset().top;
@@ -69,13 +69,13 @@ $(document).ready(function(){
       else
       {return true;}
     }
-    
+
     var bgwidth = $('#bgimage').width();
     var bgwidth9 = bgwidth*.9;
-    
+
     setTimeout(function(){
         $('#title').fadeOut('slow')}, 5000);
-    
+
     $(document).keydown(function(e){
         if(!$('#char').is(':animated')){
             switch(e.keyCode){
@@ -99,7 +99,7 @@ $(document).ready(function(){
         }
         return false;
     });
-    
+
     $(document).keyup(function(e){
             switch(e.keyCode){
                 case 37:
@@ -111,10 +111,10 @@ $(document).ready(function(){
             }
         }
     );
-    
-    
-    
-    
+
+
+
+
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     };
@@ -123,8 +123,8 @@ $(document).ready(function(){
         count++;
         var rnd = (getRandomInt(1,9)*10) + 1;
         $('#coins').append('<div class="coin" id="coin' + count + ' "style="left: ' + rnd + 'vw"></div>');
-        
-          
+
+
         setInterval(function hchecker(){
             var toppos = $('.coin:first-child').position().top;
             var bgbot = $('#bgimage').height();
@@ -140,8 +140,8 @@ $(document).ready(function(){
                 breaksound.play();
             }
         }, 200);
-        
-        
+
+
         setInterval(function(){ if(collision($('#char'), $('.coin:first-child')) == true){
             if($('.coin:first-child').css('visibility') !== 'hidden'){
                 $('.coin:first-child').css('visibility', 'hidden');
@@ -152,8 +152,8 @@ $(document).ready(function(){
                 var leftpos = $('.coin:first-child').offset().left;
                 var toppos = $('.coin:first-child').offset().top;
                 $('.coin:first-child').remove();
-                
-                
+
+
                 console.log(leftpos);
                 console.log(toppos);
                 $('#coins').append('<div class="coin2" id="collected" style="left: ' + leftpos + 'px; top: ' + toppos +'px" ></div>');
@@ -161,10 +161,10 @@ $(document).ready(function(){
                 var lrpos = $('#scorediv').offset().left + 150;
                 $('#collected').animate({top: ['50px', 'linear'], 'left': [lrpos, 'linear']}, 500);
                 setTimeout(function(){$('#collected').remove()},505);
-                
+
             }
         }}, 200);}
-        
+
     var coinspawn = function(delay){
         var siID = setInterval(goldCoin, delay);
         var scorefuncheck = Number($('#scorediv').html());
@@ -174,10 +174,10 @@ $(document).ready(function(){
             clearInterval(clearfun);
         }}, 200);
     };
-    
+
     var coinspawn2 = function(delay){
         setInterval(goldCoin, delay);};
-    
+
     var scorecount = 0;
     setInterval(function(){
         var scorecheck = (Number($('#scorediv').html()));
@@ -186,13 +186,13 @@ $(document).ready(function(){
             scorecount = 1;
         }
     }, 200);
-    
+
     setTimeout(coinspawn(2250), 1000);
-    
+
     setInterval(function(){
     $('.coin').animate({top: ['+=100px', 'linear']});
     }, 400);
-    
+
     function flying(){
         var lorfly = getRandomInt(0,2);
         if(lorfly === 1){
@@ -202,11 +202,11 @@ $(document).ready(function(){
         else{
             $('#bgimage').append('<div class="flyingray" style="left: -500px"></div>');
         setTimeout(removefly, 17000);
-        $('.flyingray').css({'transform': ['rotatey(180deg)', 'linear']});
+        $('.flyingray').css({'transform':'rotatey(180deg'});
         $('.flyingray').animate({left: bgwidth},16000);
         }
     }
-    
+
     function removefly(){
         $('.flyingray').remove();
     }
@@ -214,8 +214,8 @@ $(document).ready(function(){
         flying();
         setInterval(flying, 22000);
     }, 15000)
-    
-    //setInterval(function(){ 
+
+    //setInterval(function(){
     //    if(collision($('.flyingray'), $('.coin:first-child')) == true){}
-    
+
 });
